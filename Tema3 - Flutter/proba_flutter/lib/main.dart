@@ -1,6 +1,6 @@
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 
-final tema = ThemeData(colorScheme: ColorScheme.fromSeed(seedColor: const Color.fromARGB(255, 255, 0, 0)),);
+final tema = ThemeData(colorScheme: ColorScheme.fromSeed(seedColor: const Color.fromARGB(255, 255, 255, 255)),);
 void main(List<String> args) {
   runApp(MiAplicacion());
 }
@@ -64,12 +64,14 @@ class MyWidgetPrincipal extends StatelessWidget {
     return Scaffold(
       body: 
         Column(children: [
-          Text("Hola",style: (tema.textTheme.titleLarge),),
-          SizedBox(height: 16.0,),
-          FilledButton(onPressed: () => print("Boton pulsado"), child: Text("Preme aqui")),
-          SizedBox(height: 16.0,),
-          ElevatedButton(onPressed: () => print("Boton clickeado"), child: Text("Presiona aqui"))
-        ],)
+          Expanded(child: ListView.separated(
+              itemCount: alumnos.length ,
+              itemBuilder: (context, index) => ListTile(leading: Text("$index"),title: Text(alumnos[index],),trailing: Icon(Icons.person)),
+              separatorBuilder: (context, index) => Divider()
+            )
+          )
+        ],   
+      )
     );
   }
 }
